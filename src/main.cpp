@@ -2,7 +2,16 @@
 #include <SPI.h>
 #include "printf.h"
 
-// #define AnalogAudioMode  // Uncomment if analog audio output is necessary. Note that serial output will not work.
+/*
+	Uncomment the following line if analog audio output is necessary. 
+	Note that serial output will not work in that case and only audio
+	reception would be possible.  
+
+	if commented, both button press and audio signal will be written
+	to serial.
+*/
+
+// #define AnalogAudioMode 
 
 RF24 radio(7, 8); // Set radio up using pins 7 (CE) 8 (CS)
 
