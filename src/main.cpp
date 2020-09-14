@@ -11,7 +11,16 @@
 	to serial.
 */
 
-// #define AnalogAudioMode 
+// #define AnalogAudioMode
+
+/*
+	Uncomment the following line if Radio Meta Data is necessary.
+	Note that, meta does not comply with the bit count during operation.
+	This can cause asymetrical reading in the client program if not
+	explicitly handled.
+*/
+
+#define NoMeta
 
 RF24 radio(7, 8); // Set radio up using pins 7 (CE) 8 (CS)
 
@@ -45,9 +54,12 @@ void setup()
 
 #ifdef AnalogAudioMode
 
+#ifndef NoMeta
 	radio.printDetails(); // Print the info
-	rfAudio.begin();	  // Start up the radio and audio libraries
-	Serial.println("Radio Started in Analog Audio Mode");
+	Serial.println("Radio Starting in Analog Audio Mode");
+#endif
+
+	rfAudio.begin(); // Start up the radio and audio libraries
 
 #else
 	/* Set our radio options to the audio library defaults */
@@ -60,9 +72,12 @@ void setup()
 	radio.openReadingPipe(2, addresses[2]);
 	radio.openReadingPipe(3, addresses[3]);
 
+#ifndef NoMeta
 	radio.printDetails();
+	Serial.println("Radio starting in Remote Mode");
+#endif
 	radio.startListening(); // Need to start the radio listening
-	Serial.println("Radio Started in Remote Mode");
+
 #endif
 }
 
