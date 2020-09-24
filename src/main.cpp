@@ -95,7 +95,7 @@ void loop()
 		{
 			Serial.write(audioData[i]);
 		}
-		Serial.println();
+		
 		// default is 24kHZ sample rate which results in 750 payloads/second with 8bit audio
 		// Decrease the audio sample rate via userConfig.h if the data stream is too fast, or increase the Serial baud rate
 	}
